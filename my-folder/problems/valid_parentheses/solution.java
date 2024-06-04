@@ -1,29 +1,20 @@
 class Solution {
     public boolean isValid(String s) {
-        Stack<Character> obj = new Stack<>();
-        // String s = "([{}])";
-        if(s.length() % 2 != 0){
-            // System.out.println("Invalid parenthesis");
-            return false;
-        }
-        for(char i: s.toCharArray()){
-            if(i == '(' || i == '[' || i == '{'){
-                obj.push(i);
+        Stack<Character> stack = new Stack<>();
+        for(int i=0; i<s.length(); i++){
+            char c = s.charAt(i);
+            if(stack.isEmpty()){
+              stack.push(c);
+            }else if(c==')' && stack.peek()=='('){
+                stack.pop();
+            }else if(c==']' && stack.peek()=='['){
+                stack.pop();
+            }else if(c=='}' && stack.peek()=='{'){
+                stack.pop();
             }else{
-                if(obj.isEmpty()){return false;}
-                if(i == ')' &&  obj.peek() == '('){
-                obj.pop();
-                }else if(i == ']'&& obj.peek() == '['){
-                obj.pop();
-                }else if(i == '}'&& obj.peek() == '{'){
-                System.out.println("Popped");
-                obj.pop();
-                }else{return false;}    
+                stack.push(c);
             }
-            
-            
         }
-        return obj.isEmpty();
+       return stack.isEmpty();
     }
 }
-
