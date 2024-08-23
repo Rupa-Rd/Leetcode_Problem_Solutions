@@ -32,15 +32,15 @@ class Solution {
         System.out.println(map);
         for(int i = 0; i < t.length(); i ++){
             char tChar = t.charAt(i);
-            if(map.containsKey(tChar))
-                map.put(tChar, map.get(tChar) - 1);
+            if(!map.containsKey(tChar) || map.get(tChar) == 0)
+                return false;
+            map.put(tChar, map.get(tChar) - 1);
         }
         System.out.println(map);
-        int counter = 0;
-        for(Integer val: map.values()){
-            if (val == 0)
-                counter ++;
-        }
-        return counter == map.size() ? true : false;
+        // for(Integer val: map.values()){
+        //     if (val != 0)
+        //         return false;
+        // }
+        return true;
     }
 }
