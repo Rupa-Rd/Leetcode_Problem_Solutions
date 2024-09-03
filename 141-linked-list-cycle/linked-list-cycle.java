@@ -15,15 +15,28 @@ public class Solution {
         if(head == null)
             return false;
         // Optimized using set
-        Set<ListNode> set = new HashSet<>();
-        while(head != null){
-            if(set.contains(head)){
+//         Set<ListNode> set = new HashSet<>();
+//         while(head != null){
+//             if(set.contains(head)){
+//                 return true;
+//             }
+//             set.add(head);
+//             head = head.next;
+//         }
+        
+//         return false;
+        // Slow and fast pointer
+        ListNode slow = head, fast = head;
+        
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            
+            fast = fast.next.next;
+            
+            if(slow == fast){
                 return true;
             }
-            set.add(head);
-            head = head.next;
         }
-        
         return false;
     }
     public boolean isCycle(ListNode head){
