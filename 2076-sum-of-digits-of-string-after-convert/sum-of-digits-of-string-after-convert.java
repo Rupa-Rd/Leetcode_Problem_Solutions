@@ -1,26 +1,26 @@
 class Solution {
     public int getLucky(String s, int k) {
-        StringBuilder digit = new StringBuilder();
-
+        // Step 1: Convert the string to its numeric value sum
+        int sum = 0;
         for (char c : s.toCharArray()) {
-            int d = (c - 'a') + 1;  
-            digit.append(d);
+            int num = c - 'a' + 1;
+            sum += sumOfDigits(num);
         }
 
-        long ans = 0;
-        String digitStr = digit.toString();
-        for (int i = 0; i < k; i++) {
-            ans = sumOfDigits(digitStr);
-            digitStr = String.valueOf(ans);
+        // Step 2: Perform the transformation k times
+        while (k > 1) {
+            sum = sumOfDigits(sum);
+            k--;
         }
 
-        return (int) ans;
+        return sum;
     }
 
-    public long sumOfDigits(String numStr) {
-        long sum = 0;
-        for (char c : numStr.toCharArray()) {
-            sum += (c - '0');  
+    private int sumOfDigits(int num) {
+        int sum = 0;
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
         }
         return sum;
     }
