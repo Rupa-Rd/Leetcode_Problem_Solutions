@@ -35,7 +35,7 @@ class Solution {
         int[] res = new int[k];
         int i = 0;
         while(!pq.isEmpty()){
-            res[i++] = pq.remove().getKey();
+            res[i++] = pq.poll().getKey();
         }
         return res;
     }
