@@ -11,7 +11,7 @@ class Solution {
             int nextStart = intervals[i][0];
             int nextEnd = intervals[i][1];
             if(nextStart <= currEnd){
-                prev[0] = Math.min(prev[0], nextStart);
+                // prev[0] = Math.min(prev[0], nextStart);
                 prev[1] = Math.max(currEnd, nextEnd);
                 
             }else{
