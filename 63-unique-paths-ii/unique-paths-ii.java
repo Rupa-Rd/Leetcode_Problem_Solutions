@@ -25,29 +25,33 @@ class Solution {
             }
         }
         
-        return dp[m - 1][n - 1];
+        // return dp[m - 1][n - 1];
         
         // Space optimization: O(N * M), O(N)
-//         int[] prevRow = new int[n];
-//         Arrays.fill(prevRow, -1);
+        int[] prevRow = new int[n];
+        Arrays.fill(prevRow, -1);
         
-//         for(int i = 0; i < m; i ++){
-//             int[] tempArr = new int[n];
-//             for(int j = 0; j < n; j++){
-//                 if(i >= 0 && j >= 0 && obstacleGrid[i][j] == 1)
-//                     tempArr[j] = 0;
-//                 else if(i == 0 || j == 0)
-//                     tempArr[j] = 1;
-//                 else{
-//                     int up = prevRow[j];
-//                     int left = tempArr[j - 1];
-//                     tempArr[j] = up + left;
-//                 }
-//             }
-//             prevRow = tempArr;
-//         }
+        for(int i = 0; i < m; i ++){
+            int[] tempArr = new int[n];
+            for(int j = 0; j < n; j++){
+                if(i >= 0 && j >= 0 && obstacleGrid[i][j] == 1)
+                    tempArr[j] = 0;
+                else if(i == 0 && j == 0)
+                    tempArr[j] = 1;
+                else{
+                    int up = 0, left = 0;
+                    if(i > 0)
+                        up = prevRow[j];
+                    if(j > 0)
+                        left = tempArr[j - 1];
+                    
+                    tempArr[j] = up + left;
+                }
+            }
+            prevRow = tempArr;
+        }
         
-//         return prevRow[n - 1];
+        return prevRow[n - 1];
         // return recursion(m - 1, n - 1, obstacleGrid, dp);
     }
     public int recursion(int m, int n, int[][] matrix, int[][] dp){
