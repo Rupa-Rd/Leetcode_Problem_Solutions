@@ -13,7 +13,7 @@ public class Codec {
     public String serialize(TreeNode root) {
         StringBuilder ans = new StringBuilder();
         Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
+        q.add(root);
         
         while(!q.isEmpty()){
             TreeNode curr = q.poll();
@@ -21,8 +21,8 @@ public class Codec {
                 ans.append("#");
             }else{
                 ans.append(curr.val);
-                q.offer(curr.left);
-                q.offer(curr.right);
+                q.add(curr.left);
+                q.add(curr.right);
             }
             if(!q.isEmpty()){
                 ans.append(",");
