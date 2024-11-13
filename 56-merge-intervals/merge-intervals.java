@@ -3,7 +3,7 @@ class Solution {
         Arrays.sort(intervals, (a,b) -> a[0] - b[0]);
         List<int[]> merged = new ArrayList<>();
         int[] prev = intervals[0];
-        merged.add(prev);
+        // merged.add(prev);
         // int[] curr = intervals[1];
         int i = 1, n = intervals.length;
         while(i < n){
@@ -15,13 +15,15 @@ class Solution {
                 prev[1] = Math.max(currEnd, nextEnd);
                 
             }else{
+                 merged.add(prev);
                 prev = intervals[i];
-                merged.add(prev);
+               
                 
             }
             // curr = intervals[i];
             i++;
         }
+        merged.add(prev);
         // if(prev == curr)
         //     merged.add(prev);
         return merged.toArray(new int[merged.size()][]);
