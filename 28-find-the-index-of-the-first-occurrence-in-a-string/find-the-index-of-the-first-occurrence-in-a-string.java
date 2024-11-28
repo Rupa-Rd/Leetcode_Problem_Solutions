@@ -19,7 +19,9 @@ class Solution {
     }
     public boolean contains(int s, int n, String a, String b){
         int j = 0;
-        for(int i = s; i < a.length() && j < n; i++){
+        if(s + n > a.length())
+            return false;
+        for(int i = s; i < s + n ; i++){
             if(a.charAt(i) == b.charAt(j)){
                 j++;
             }else{
