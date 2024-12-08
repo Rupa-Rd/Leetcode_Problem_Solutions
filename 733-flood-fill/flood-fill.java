@@ -4,10 +4,22 @@ class Solution {
         
         
         if(image[sr][sc] != color){
-            bfs(image, sr, sc, color, image[sr][sc]);
+            dfs(image, sr, sc, color, image[sr][sc]);
         }
         
         return image;
+    }
+    public void dfs(int[][] image, int sr, int sc, int color, int startColor){
+        if(sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length || image[sr][sc] != startColor){
+            return;
+        }
+        
+        image[sr][sc] = color;
+        
+        dfs(image, sr - 1, sc, color, startColor);
+        dfs(image, sr + 1, sc, color, startColor);
+        dfs(image, sr, sc - 1, color, startColor);
+        dfs(image, sr, sc + 1, color, startColor);
     }
     public void bfs(int[][] image, int sr, int sc, int color, int startColor){
         int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
