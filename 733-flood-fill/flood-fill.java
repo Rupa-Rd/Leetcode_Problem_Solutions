@@ -2,12 +2,9 @@ class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         int n = image.length, m = image[0].length;
         
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                if(i == sr && j == sc && image[i][j] != color){
-                    bfs(image, sr, sc, color, image[i][j]);
-                }
-            }
+        
+        if(image[sr][sc] != color){
+            bfs(image, sr, sc, color, image[sr][sc]);
         }
         
         return image;
