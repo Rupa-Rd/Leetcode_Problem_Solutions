@@ -26,7 +26,9 @@ class Solution {
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
                 if(board[i][j] == 'O' && !visited[i][j]){
-                    convertRegionUsingDFS(i, j, board, visited);
+                    // convertRegionUsingDFS(i, j, board, visited);
+                    board[i][j] = 'X';
+                    visited[i][j] = true;
                 }
             }
         }
