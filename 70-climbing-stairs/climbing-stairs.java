@@ -1,36 +1,51 @@
 class Solution {
     public int climbStairs(int n) {
-        // Recursion : O(2 ^ n)
-        // Modifying code to do memoization
-
-//         int[] dp = new int[n + 1];
-//         Arrays.fill(dp, -1);
-//         int ans = nWays(n, dp);
-        
-//         return ans;
-        // Space optimization
-        int prev1 = 1, prev2 = 1,curr = 1;
-        
-        for(int i = 2; i <= n; i++){
-            curr = prev1 + prev2;
-            prev2 = prev1;
-            prev1 = curr;
+        // Recursive solution: T(2^n)
+        // return recursiveSol(n);
+        // Top up using dp: O(N)
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp,  -1);
+    //    memo(n, dp);
+    //    return dp[n];
+       // Bottom up
+       dp[0] = 1;
+       for(int i = 1; i <= n; i++){
+        int twoStep = 0, singleStep = dp[i - 1];
+        if(i > 1){
+            twoStep = dp[i - 2];
         }
-        
-        return curr;
+        dp[i] = singleStep + twoStep;
+       }
+       return dp[n];
     }
-    public int nWays(int n, int[] dp){
-        if (n == 0){
+
+    public int memo(int n, int[] dp){
+        // rec(n - 1) + rec(n - 2)
+        // if n == 0 -> 1, if n < 0 -> 0
+
+        if(n == 0){
             return 1;
         }
-        if(n == 1){
-            return 1;
+        if(n < 0){
+            return 0;
         }
-        
         if(dp[n] != -1){
             return dp[n];
         }
-        return dp[n] = nWays(n - 1, dp) + nWays(n - 2, dp);
-        
+        return dp[n] = recursiveSol(n - 1) + recursiveSol(n - 2);
+    }
+
+    public int recursiveSol(int n){
+        // rec(n - 1) + rec(n - 2)
+        // if n == 0 -> 1, if n < 0 -> 0
+
+        if(n == 0){
+            return 1;
+        }
+        if(n < 0){
+            return 0;
+        }
+
+        return recursiveSol(n - 1) + recursiveSol(n - 2);
     }
 }
