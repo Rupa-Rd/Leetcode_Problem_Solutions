@@ -1,35 +1,24 @@
 class Solution {
     public int strStr(String haystack, String needle) {
-        int i = 0, n = haystack.length(), m = needle.length();
-        char start = needle.charAt(0);
-        
-        if(m > n)
+        int j = 0, n = haystack.length(), m = needle.length();
+
+        if(m > n){
             return -1;
-        while(i < n){
-            char ch = haystack.charAt(i);
-            
-            if(ch == start){
-                if(contains(i, m, haystack, needle))
-                    return i;
-            }
-            i++;
         }
-        
-        return -1;
-    }
-    public boolean contains(int s, int n, String a, String b){
-        int j = 0;
-        if(s + n > a.length())
-            return false;
-        for(int i = s; i < s + n ; i++){
-            if(a.charAt(i) == b.charAt(j)){
+        for(int i = 0; i < n; i++){
+            int k = i;
+            while(j < m && k < n && haystack.charAt(k) == needle.charAt(j)){
                 j++;
-            }else{
-                return false;
+                k++;
             }
-            
+
+            if(j == m){
+                return i;
+            }else{
+                j = 0;
+            }
         }
-        
-        return j == n ? true : false;
+
+        return -1;
     }
 }
